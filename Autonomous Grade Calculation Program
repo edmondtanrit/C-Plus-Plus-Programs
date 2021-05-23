@@ -1,0 +1,290 @@
+//Edmond Tan 
+//Description: This program calculates a student's final course grade based on 
+//grades for their HWs, labs, term paper, final exam, and class participation grades.
+//Written to help a previous math teacher have less work grading
+
+//Grading specifications:
+//-----------------------
+//4 HW assignments, each worth 10 points
+//2 lab assignments, each worth 50 points
+//midterm and final are worth 100 points, each count as 25% of grade 
+//A=95, B=85, C=75, D=65, & F=55
+//Can only input within parameters
+
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+   //homeworks
+   int hw1;
+   int hw2;
+   int hw3;
+   int hw4;
+   
+   //labs
+   int lab1;
+   int lab2;
+   
+   //midterms and final
+   int midTerm;
+   int final;
+   
+   //termpaper
+   string termPaper;
+ 
+   //unknown letter or not assigned
+   
+   //class part
+   bool classPart;
+
+
+   //constant factors
+   const double hwFactor = 0.15;
+   const double labFactor = 0.20;
+   const double midTermFactor = 0.25;
+   const double finalFactor = 0.25;
+   const double paperFactor = 0.10;
+   
+   //shown values
+   double hwAvgShown;
+   double labAvgShown; 
+   double midTermShown;
+   float finalShown;
+   
+   //hidden Values
+   double hwAvgHid = 0.00;
+   double labAvgHid = 0.00;
+   double midTermHid = 0.00;
+   double finalHid = 0.00;
+   double termPaperHid = 0.00;
+   double classPartHid = 0.00;
+   
+   //extra steps because we have to use the switch function
+   int letterGrade = 0;
+  
+   
+   cin >> hw1; cin >> hw2; cin >> hw3; cin >> hw4;
+   cin >> lab1; cin >> lab2;
+   cin >> midTerm; 
+   cin >> final;
+   cin >> termPaper; 
+   cin >> classPart;
+   
+   //hidden grades are the shown grades * the factor of the assignment. 
+   
+   cout << endl << endl;
+   
+   //getting shown hw grades first, then hidden grades
+   hwAvgShown = (hw1 + hw2 + hw3 + hw4) * 2.5; //remember to setprecision in cout, same for labs
+   hwAvgHid = static_cast<double>(hwAvgShown) * hwFactor;
+   hwAvgHid = hwAvgHid + 0.0;
+   cout << fixed << setprecision(2) << "Homework Average...... :" <<  right << setw(8) << hwAvgShown << endl;
+   
+   //getting shown lab frades first, then hidden grades
+   labAvgShown = lab1 + lab2;
+   labAvgHid = static_cast<double>(labAvgShown) * labFactor;
+   labAvgHid = labAvgHid + 0.0;
+   cout << fixed << setprecision(2) << "Laboratory Average.... :"  << right << setw(8) << labAvgShown << endl;
+   
+   
+   //getting shown midterm grades and then hidden grades
+   midTermShown = midTerm; //just shows the grade as is
+   midTermHid = midTerm * midTermFactor;
+   midTermHid = midTermHid + 0.0;
+   cout << fixed << setprecision(0) << "Midterm Exam.......... :"<< right << setw(8) << midTermShown << endl;
+   
+   //getting shown final grades and then hidden grades
+   finalShown = final;
+   finalHid = static_cast<double>(final) * finalFactor;
+   finalHid = finalHid + 0.0;
+   cout << "Final Exam............ :" << right << setw(8) << finalShown << endl;
+   
+   //termpaper comprehension
+   if (termPaper == "A"){
+      //cout << "Term Paper............ :" << "    95[A]" << endl;
+      letterGrade = 1;
+      termPaperHid = paperFactor * 95.00;
+   }
+   else if (termPaper == "a"){
+      //cout << "Term Paper............ :" << "    95[a]" << endl;
+      letterGrade = 6;
+      termPaperHid = paperFactor * 95.00;
+   }
+      else if (termPaper == "B"){
+      //cout << "Term Paper............ :" << "    85[B]" << endl;
+      letterGrade = 2;
+      termPaperHid = paperFactor * 85.00;
+      }
+   else if (termPaper == "b"){
+      //cout << "Term Paper............ :" << "    85[b]" << endl;
+      letterGrade = 7;
+      termPaperHid = paperFactor * 85.00;
+      }
+      else if (termPaper == "C"){
+         
+         //cout << "Term Paper............ :" << "    75[C]" << endl;
+         letterGrade = 3;
+         termPaperHid = paperFactor * 75.00;
+      }
+      else if (termPaper == "c"){
+         
+        // cout << "Term Paper............ :" << "    75[c]" << endl;
+        letterGrade = 8;
+         termPaperHid = paperFactor * 75.00;
+      }
+      else if (termPaper == "D"){
+         
+         //cout << "Term Paper............ :" << "    65[D]" << endl;
+         letterGrade = 4;
+         termPaperHid = paperFactor * 65.00;
+         }
+         else if (termPaper == "d"){
+         letterGrade = 9;
+         //cout << "Term Paper............ :" << "    65[d]" << endl;
+         termPaperHid = paperFactor * 65.00;
+         }
+      else if (termPaper == "F"){
+         termPaperHid = paperFactor * 55.00;
+         letterGrade = 5;
+      } 
+      else if (termPaper == "f"){
+      
+         //cout << "Term Paper............ :" << "    55[f]" << endl;
+         termPaperHid = paperFactor * 55.00;
+         letterGrade = 10;
+      }
+      else {
+         //cout << "Term Paper............ :     0" << endl;
+         letterGrade = 0;
+         termPaperHid = paperFactor * 0.0;
+      }
+      
+      
+      
+      
+   //this switch function detects what term paper output to give depending on the input
+   switch (letterGrade) {
+   case 1: 
+      cout << "Term Paper............ :" << right << setw(11) << "95[A]" << endl;
+      break;
+
+   case 2:
+      cout << "Term Paper............ :"<< right << setw(11) << "85[B]" << endl;
+      break;
+   
+   case 3: 
+      cout << "Term Paper............ :"<< right << setw(11) << "75[C]" << endl;
+      break;
+
+   case 4:
+      cout << "Term Paper............ :"<< right << setw(11) <<  "65[D]" << endl;
+      break;
+      
+   case 5:
+      cout << "Term Paper............ :"<< right << setw(11) << "55[F]" << endl;
+      break;
+      
+      case 6: 
+      cout << "Term Paper............ :" << right << setw(11) << "95[a]" << endl;
+      break;
+
+   case 7:
+      cout << "Term Paper............ :"<< right << setw(11) << "85[b]" << endl;
+      break;
+   
+   case 8: 
+      cout << "Term Paper............ :"<< right << setw(11) << "75[c]" << endl;
+      break;
+
+  case 9: 
+      cout << "Term Paper............ :"<< right << setw(11) << "65[d]" << endl;
+      break;
+   case 10:
+   cout << "Term Paper............ :"<< right << setw(11) << "55[f]" << endl;
+      break;
+   
+   default: // If no other case matches
+      // Statements
+      cout << "Term Paper............ :" << right << setw(9) << "0[" << termPaper << "]" << endl;
+      break;
+      
+}
+
+
+//class participation
+   if (classPart == 1) {
+      cout << "Class Participation... :" << right << setw(8) << "100" << endl << endl;
+      classPartHid = 5.00;
+      
+   }
+   else {
+      classPartHid = classPartHid + 0.00;
+      cout << "Class Participation... :" << right << setw(8) <<  "0" << endl << endl;
+      
+   }
+
+
+   
+   //hidden values
+   finalShown = hwAvgHid + labAvgHid + midTermHid + finalHid + termPaperHid + classPartHid;
+   
+   
+   std::cout << std::setprecision(2) << std::fixed << "Final Average......... :" << right << setw(8) << finalShown << endl;
+
+
+
+   
+   //Final Average 
+   if (finalShown < 60.00) {
+      cout << "Course Letter Grade... :" << right << setw(7) << "F" << endl;
+   }
+   else if (finalShown >= 60.0 && finalShown < 70.0){
+      cout << "Course Letter Grade... :" << right << setw(7) << "D" << endl;
+   }
+   else if (finalShown >= 70.0 && finalShown < 73.0){
+      cout << "Course Letter Grade... :" << right << setw(8) << "C-" << endl;
+   }
+   else if (finalShown >= 73.0 && finalShown < 77.0){
+      cout << "Course Letter Grade... :" << right << setw(7) << "C" << endl;
+   }
+   else if (finalShown >= 77.0 && finalShown < 80.0){
+      cout << "Course Letter Grade... :" << right << setw(8) << "C+" << endl;
+   }
+   else if (finalShown >= 80.0 && finalShown < 83.0){
+      cout << "Course Letter Grade... :" << right << setw(8) << "B-" << endl;
+   }
+   else if (finalShown >= 83.0 && finalShown < 87.0){
+      cout << "Course Letter Grade... :" << right << setw(7) << "B" << endl;
+   }
+   else if (finalShown >= 87.0 && finalShown < 90.0){
+      cout << "Course Letter Grade... :" << right << setw(8) << "B+" << endl;
+   }
+   else if (finalShown >= 90.0 && finalShown < 93.0){
+      cout << "Course Letter Grade... :" << right << setw(8) << "A-" << endl;
+   }
+   else if (finalShown >= 93.0){
+      cout << "Course Letter Grade... :" << right << setw(7) << "A" << endl;
+   }
+   
+   
+   /*for checking if values/mathematical calculations were correct
+   cout << endl << endl;
+   cout << "true hw avg: " << hwAvgHid << endl;
+   cout << "true lab avg: " << labAvgHid << endl;
+   cout << "true midterm avg: " << midTermHid << endl;
+   cout << "true final avg: " << finalHid << endl;
+   cout << "true term paper avg: " << termPaperHid << endl;
+   */
+   
+   
+   
+   
+
+
+   
+   return (0);
+}
